@@ -1,0 +1,27 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Django
+*.log
+
+# Note: db.sqlite3 and media/ are intentionally NOT ignored here so that
+# anyone who clones the repo sees the demo coffee menu (with images) right
+# away instead of an empty database. Remove them from git later if you'd
+# rather ship a clean/empty database.
+
+# Environment variables / secrets
+.env
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

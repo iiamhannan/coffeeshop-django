@@ -1,0 +1,1001 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order Ahead | Hanni's</title>
+
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- Your Existing CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{% static 'pages/style.css' %}">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+NAVBAR
+========================= -->
+
+<nav class="navbar navbar-expand-lg coffee-navbar">
+
+    <div class="container">
+
+
+        <!-- LOGO -->
+
+        <a
+            class="navbar-brand coffee-logo"
+            href="{% url 'home' %}">
+
+            Hanni's <span></span>
+
+        </a>
+
+
+        <!-- MOBILE BUTTON -->
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+            aria-controls="mainNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+
+        <!-- NAVIGATION -->
+
+        <div
+            class="collapse navbar-collapse"
+            id="mainNav">
+
+
+            <ul class="navbar-nav ms-auto">
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{% url 'home' %}">
+
+                        Home
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{% url 'menu' %}">
+
+                        Menu
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{% url 'feedback' %}">
+
+                        Feedback
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{% url 'about' %}">
+
+                        About Us
+
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+
+            <a
+                href="{% url 'order_ahead' %}"
+                class="btn-order ms-lg-4">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                Order Ahead
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+PAGE HEADER
+========================= -->
+
+<section class="page-header text-center">
+
+    <div class="container">
+
+
+        <p class="small-heading">
+
+            QUICK & EASY
+
+        </p>
+
+
+        <h1>
+
+            Order <em>Ahead</em>
+
+        </h1>
+
+
+        <p>
+
+            Choose your favorite coffee and we'll prepare it
+            for you.
+
+        </p>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+ORDER FORM
+========================= -->
+
+<section class="form-section">
+
+    <div class="container">
+
+
+        <div class="form-card">
+
+
+            <!-- FORM TITLE -->
+
+            <div class="text-center mb-4">
+
+
+                <div class="menu-icon mx-auto">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                </div>
+
+
+                <h2>
+
+                    Place Your Order
+
+                </h2>
+
+
+                <p>
+
+                    Add your favorite coffees to your order.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- ERROR -->
+
+            {% if error %}
+
+                <div class="alert alert-danger">
+
+                    {{ error }}
+
+                </div>
+
+            {% endif %}
+
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+
+                <!-- =========================
+                NAME + PHONE
+                ========================= -->
+
+                <div class="row">
+
+
+                    <div class="col-md-6 mb-3">
+
+
+                        <label class="form-label">
+
+                            Your Name
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+
+                    </div>
+
+
+
+                    <div class="col-md-6 mb-3">
+
+
+                        <label class="form-label">
+
+                            Phone Number
+
+                        </label>
+
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            class="form-control"
+                            placeholder="03XX-XXXXXXX"
+                            required
+                        >
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =========================
+                COFFEE SELECTION
+                ========================= -->
+
+                <div class="mb-3">
+
+
+                    <label class="form-label">
+
+                        Select Coffee
+
+                    </label>
+
+
+
+                    <div id="coffee-items">
+
+
+                        <!-- FIRST COFFEE -->
+
+                        <div class="coffee-row">
+
+
+                            <div class="row align-items-end">
+
+
+                                <!-- COFFEE -->
+
+                                <div class="col-md-7 mb-3">
+
+
+                                    <select
+                                        name="coffee"
+                                        class="form-select coffee-select"
+                                        required
+                                    >
+
+
+                                        <option
+                                            value=""
+                                            selected
+                                            disabled
+                                        >
+
+                                            Choose your drink
+
+                                        </option>
+
+
+                                        {% for coffee in coffees %}
+
+
+                                            <option
+                                                value="{{ coffee.id }}"
+                                                data-price="{{ coffee.price }}"
+                                            >
+
+                                                {{ coffee.name }}
+                                                — Rs. {{ coffee.price }}
+
+                                            </option>
+
+
+                                        {% empty %}
+
+
+                                            <option disabled>
+
+                                                No coffee available
+
+                                            </option>
+
+
+                                        {% endfor %}
+
+
+                                    </select>
+
+
+                                </div>
+
+
+
+                                <!-- QUANTITY -->
+
+                                <div class="col-md-3 mb-3">
+
+
+                                    <input
+                                        type="number"
+                                        name="quantity"
+                                        class="form-control quantity-input"
+                                        value="1"
+                                        min="1"
+                                        required
+                                    >
+
+
+                                </div>
+
+
+
+                                <!-- REMOVE -->
+
+                                <div class="col-md-2 mb-3">
+
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-danger w-100 remove-coffee"
+                                    >
+
+                                        <i class="fa-solid fa-trash"></i>
+
+                                    </button>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- =========================
+                    ADD ANOTHER COFFEE
+                    ========================= -->
+
+                    <button
+                        type="button"
+                        class="btn-outline-hanni"
+                        id="add-coffee"
+                    >
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        Add Another Coffee
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- =========================
+                PICKUP TIME
+                ========================= -->
+
+                <div class="mb-3">
+
+
+                    <label class="form-label">
+
+                        Pickup Time
+
+                    </label>
+
+
+                    <input
+                        type="time"
+                        name="pickup_time"
+                        class="form-control"
+                        required
+                    >
+
+
+                </div>
+
+
+
+                <!-- =========================
+                SPECIAL INSTRUCTIONS
+                ========================= -->
+
+                <div class="mb-4">
+
+
+                    <label class="form-label">
+
+                        Special Instructions
+
+                    </label>
+
+
+                    <textarea
+                        name="instructions"
+                        class="form-control"
+                        rows="4"
+                        placeholder="Any special request?"
+                    ></textarea>
+
+
+                </div>
+
+
+
+                <!-- =========================
+                ORDER SUMMARY
+                ========================= -->
+
+                <div
+                    class="p-4 mb-4"
+                    style="
+                        background:#f8f4ed;
+                        border-radius:18px;
+                        border:1px solid #eadfd2;
+                    "
+                >
+
+
+                    <h4
+                        style="
+                            font-weight:800;
+                            margin-bottom:20px;
+                        "
+                    >
+
+                        <i
+                            class="fa-solid fa-receipt"
+                            style="color:#8b2e3f;"
+                        ></i>
+
+                        Order Summary
+
+                    </h4>
+
+
+
+                    <div id="bill-items">
+
+
+                        <p
+                            class="text-center"
+                            style="color:#765f55;"
+                        >
+
+                            Select coffee to see your bill.
+
+                        </p>
+
+
+                    </div>
+
+
+
+                    <hr>
+
+
+
+                    <div
+                        class="d-flex justify-content-between"
+                        style="
+                            font-size:23px;
+                            font-weight:800;
+                        "
+                    >
+
+                        <span>
+
+                            Total
+
+                        </span>
+
+
+                        <span
+                            id="total-price"
+                            style="color:#8b2e3f;"
+                        >
+
+                            Rs. 0
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =========================
+                PLACE ORDER
+                ========================= -->
+
+                <button
+                    type="submit"
+                    class="btn-primary-hanni border-0 w-100"
+                >
+
+                    <i class="fa-solid fa-check me-2"></i>
+
+                    Place Order
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+FOOTER
+========================= -->
+
+<footer class="coffee-footer">
+
+    <div class="container">
+
+
+        <h4>
+
+            Hanni's
+
+        </h4>
+
+
+        <p>
+
+            Your coffee, ready when you are.
+
+        </p>
+
+
+        <small>
+
+            © 2026 Hanni's.
+
+        </small>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================
+JAVASCRIPT
+========================= -->
+
+<script>
+
+
+// ========================================
+// ADD ANOTHER COFFEE
+// ========================================
+
+document
+    .getElementById('add-coffee')
+    .addEventListener('click', function () {
+
+
+        const container =
+            document.getElementById('coffee-items');
+
+
+        const firstRow =
+            document.querySelector('.coffee-row');
+
+
+        const newRow =
+            firstRow.cloneNode(true);
+
+
+        // Reset coffee
+
+        const select =
+            newRow.querySelector('.coffee-select');
+
+        select.selectedIndex = 0;
+
+
+        // Reset quantity
+
+        const quantity =
+            newRow.querySelector('.quantity-input');
+
+        quantity.value = 1;
+
+
+        container.appendChild(newRow);
+
+
+        updateBill();
+
+    });
+
+
+
+// ========================================
+// REMOVE COFFEE
+// ========================================
+
+document.addEventListener(
+    'click',
+    function (event) {
+
+
+        const button =
+            event.target.closest('.remove-coffee');
+
+
+        if (!button) {
+
+            return;
+
+        }
+
+
+        const rows =
+            document.querySelectorAll('.coffee-row');
+
+
+        // At least one row must remain
+
+        if (rows.length === 1) {
+
+            alert(
+                'You need at least one coffee.'
+            );
+
+            return;
+
+        }
+
+
+        button
+            .closest('.coffee-row')
+            .remove();
+
+
+        updateBill();
+
+    }
+);
+
+
+
+// ========================================
+// UPDATE BILL
+// ========================================
+
+function updateBill() {
+
+
+    const rows =
+        document.querySelectorAll('.coffee-row');
+
+
+    const billItems =
+        document.getElementById('bill-items');
+
+
+    const totalPrice =
+        document.getElementById('total-price');
+
+
+    billItems.innerHTML = '';
+
+
+    let total = 0;
+
+    let hasItems = false;
+
+
+
+    rows.forEach(function (row) {
+
+
+        const select =
+            row.querySelector('.coffee-select');
+
+
+        const quantityInput =
+            row.querySelector('.quantity-input');
+
+
+        if (
+            select.value &&
+            quantityInput.value
+        ) {
+
+
+            const selectedOption =
+                select.options[
+                    select.selectedIndex
+                ];
+
+
+            const price =
+                parseFloat(
+                    selectedOption.dataset.price
+                );
+
+
+            const quantity =
+                parseInt(
+                    quantityInput.value
+                );
+
+
+            const coffeeName =
+                selectedOption.textContent
+                    .split('—')[0]
+                    .trim();
+
+
+            const subtotal =
+                price * quantity;
+
+
+            total += subtotal;
+
+            hasItems = true;
+
+
+
+            // Create bill row
+
+            const billRow =
+                document.createElement('div');
+
+
+            billRow.className =
+                'd-flex justify-content-between mb-3';
+
+
+            billRow.innerHTML = `
+
+                <div>
+
+                    <strong>
+                        ${coffeeName}
+                    </strong>
+
+                    <small
+                        style="
+                            display:block;
+                            color:#765f55;
+                        "
+                    >
+
+                        Rs. ${price}
+                        ×
+                        ${quantity}
+
+                    </small>
+
+                </div>
+
+
+                <strong>
+
+                    Rs. ${subtotal.toFixed(2)}
+
+                </strong>
+
+            `;
+
+
+            billItems.appendChild(
+                billRow
+            );
+
+        }
+
+    });
+
+
+
+    // No coffee selected
+
+    if (!hasItems) {
+
+
+        billItems.innerHTML = `
+
+            <p
+                class="text-center"
+                style="color:#765f55;"
+            >
+
+                Select coffee to see your bill.
+
+            </p>
+
+        `;
+
+    }
+
+
+
+    // Update total
+
+    totalPrice.textContent =
+        'Rs. ' + total.toFixed(2);
+
+}
+
+
+
+// ========================================
+// COFFEE CHANGE
+// ========================================
+
+document.addEventListener(
+    'change',
+    function (event) {
+
+
+        if (
+            event.target.classList.contains(
+                'coffee-select'
+            )
+        ) {
+
+            updateBill();
+
+        }
+
+    }
+);
+
+
+
+// ========================================
+// QUANTITY CHANGE
+// ========================================
+
+document.addEventListener(
+    'input',
+    function (event) {
+
+
+        if (
+            event.target.classList.contains(
+                'quantity-input'
+            )
+        ) {
+
+            updateBill();
+
+        }
+
+    }
+);
+
+
+
+// ========================================
+// INITIAL BILL
+// ========================================
+
+updateBill();
+
+
+</script>
+
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+</body>
+
+</html>
