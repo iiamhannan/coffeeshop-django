@@ -1,4 +1,5 @@
 # Hanni's Coffee Shop ☕
+🔗 Live Demo: https://iiamhannan.pythonanywhere.com
 
 A Django web app for a coffee shop — browse the menu, place a pickup order,
 and leave feedback.
