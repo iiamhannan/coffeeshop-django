@@ -1,0 +1,797 @@
+/* ==========================================================
+   HANNI'S — ADMIN THEME
+   Light + Dark mode. Django ke apne CSS variables override
+   kiye gaye hain, isliye poora admin (list, form, filters,
+   login, sidebar) automatically theme follow karta hai.
+   ========================================================== */
+
+
+/* ==========================================================
+   1. LIGHT THEME (default)
+   ========================================================== */
+
+html[data-theme="light"],
+:root {
+    /* Brand */
+    --hanni-wine: #8b2e3f;
+    --hanni-wine-dark: #6e2432;
+    --hanni-espresso: #2b1a17;
+    --hanni-cream: #f8f4ed;
+    --hanni-sand: #ead7bd;
+
+    /* Status colors */
+    --hanni-ok-fg: #1c6b3f;
+    --hanni-ok-bg: #e2f3e8;
+    --hanni-off-fg: #8a4b12;
+    --hanni-off-bg: #fbeedd;
+    --hanni-info-fg: #274b73;
+    --hanni-info-bg: #e6eefa;
+
+    /* Shape */
+    --hanni-radius: 10px;
+    --hanni-shadow: 0 1px 2px rgba(43, 26, 23, .06),
+                    0 6px 20px rgba(43, 26, 23, .07);
+
+    /* --- Django core variables --- */
+    --primary: #8b2e3f;
+    --secondary: #2b1a17;
+    --accent: #c98b57;
+    --primary-fg: #ffffff;
+
+    --body-fg: #241814;          /* main text – bohot high contrast */
+    --body-bg: #faf7f2;
+    --body-quiet-color: #6a564e; /* secondary text */
+    --body-medium-color: #4a3830;
+    --body-loud-color: #140c0a;
+
+    --header-color: #f3e7d9;
+    --header-branding-color: #ffffff;
+    --header-bg: #2b1a17;
+    --header-link-color: #ffffff;
+
+    --breadcrumbs-fg: #e3d3c4;
+    --breadcrumbs-link-fg: #ffffff;
+    --breadcrumbs-bg: #3d2923;
+
+    --link-fg: #8b2e3f;
+    --link-hover-color: #5d1b27;
+    --link-selected-fg: #6e2432;
+
+    --hairline-color: #eae1d5;
+    --border-color: #ddd0c1;
+
+    --error-fg: #b3261e;
+
+    --message-success-bg: #e2f3e8;
+    --message-warning-bg: #fbeedd;
+    --message-error-bg: #fbe5e3;
+
+    --darkened-bg: #f2ece2;
+    --selected-bg: #efe4d6;
+    --selected-row: #fbf1e2;
+
+    --button-fg: #ffffff;
+    --button-bg: #8b2e3f;
+    --button-hover-bg: #6e2432;
+    --default-button-bg: #6e2432;
+    --default-button-hover-bg: #8b2e3f;
+    --close-button-bg: #6a564e;
+    --close-button-hover-bg: #3d2923;
+    --delete-button-bg: #b3261e;
+    --delete-button-hover-bg: #8f1d17;
+
+    --object-tools-fg: #ffffff;
+    --object-tools-bg: #3d2923;
+    --object-tools-hover-bg: #8b2e3f;
+
+    --font-family-primary: "Inter", "Segoe UI", system-ui, Roboto,
+                           "Helvetica Neue", Arial, sans-serif;
+    --font-family-monospace: ui-monospace, "SF Mono", "Cascadia Mono",
+                             "Roboto Mono", Menlo, Consolas, monospace;
+
+    color-scheme: light;
+}
+
+
+/* ==========================================================
+   2. DARK THEME
+   (auto = system setting, dark = manual toggle)
+   ========================================================== */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --hanni-ok-fg: #7fdca3;
+        --hanni-ok-bg: #143026;
+        --hanni-off-fg: #f0b979;
+        --hanni-off-bg: #33230f;
+        --hanni-info-fg: #9dc3f0;
+        --hanni-info-bg: #16243a;
+        --hanni-shadow: 0 1px 2px rgba(0, 0, 0, .5),
+                        0 6px 20px rgba(0, 0, 0, .35);
+
+        --primary: #c05e72;
+        --secondary: #1d1715;
+        --accent: #d9a273;
+        --primary-fg: #ffffff;
+
+        --body-fg: #f2ece6;
+        --body-bg: #141010;
+        --body-quiet-color: #bdaba2;
+        --body-medium-color: #ddd2cb;
+        --body-loud-color: #ffffff;
+
+        --header-color: #e8d9cc;
+        --header-branding-color: #ffffff;
+        --header-bg: #1d1715;
+        --header-link-color: #ffffff;
+
+        --breadcrumbs-fg: #cbb9ae;
+        --breadcrumbs-link-fg: #f2ece6;
+        --breadcrumbs-bg: #241c19;
+
+        --link-fg: #f0a8b6;
+        --link-hover-color: #ffc6d0;
+        --link-selected-fg: #f0a8b6;
+
+        --hairline-color: #2a2220;
+        --border-color: #3a2f2c;
+
+        --error-fg: #ff8a80;
+
+        --message-success-bg: #143026;
+        --message-warning-bg: #33230f;
+        --message-error-bg: #3a1614;
+
+        --darkened-bg: #1c1715;
+        --selected-bg: #241d1a;
+        --selected-row: #2e2320;
+
+        --button-fg: #ffffff;
+        --button-bg: #a33d51;
+        --button-hover-bg: #c05e72;
+        --default-button-bg: #a33d51;
+        --default-button-hover-bg: #c05e72;
+        --close-button-bg: #3a2f2c;
+        --close-button-hover-bg: #574842;
+        --delete-button-bg: #a3302a;
+        --delete-button-hover-bg: #c4423b;
+
+        --object-tools-fg: #ffffff;
+        --object-tools-bg: #3a2f2c;
+        --object-tools-hover-bg: #a33d51;
+
+        color-scheme: dark;
+    }
+}
+
+html[data-theme="dark"] {
+    --hanni-ok-fg: #7fdca3;
+    --hanni-ok-bg: #143026;
+    --hanni-off-fg: #f0b979;
+    --hanni-off-bg: #33230f;
+    --hanni-info-fg: #9dc3f0;
+    --hanni-info-bg: #16243a;
+    --hanni-shadow: 0 1px 2px rgba(0, 0, 0, .5),
+                    0 6px 20px rgba(0, 0, 0, .35);
+
+    --primary: #c05e72;
+    --secondary: #1d1715;
+    --accent: #d9a273;
+    --primary-fg: #ffffff;
+
+    --body-fg: #f2ece6;
+    --body-bg: #141010;
+    --body-quiet-color: #bdaba2;
+    --body-medium-color: #ddd2cb;
+    --body-loud-color: #ffffff;
+
+    --header-color: #e8d9cc;
+    --header-branding-color: #ffffff;
+    --header-bg: #1d1715;
+    --header-link-color: #ffffff;
+
+    --breadcrumbs-fg: #cbb9ae;
+    --breadcrumbs-link-fg: #f2ece6;
+    --breadcrumbs-bg: #241c19;
+
+    --link-fg: #f0a8b6;
+    --link-hover-color: #ffc6d0;
+    --link-selected-fg: #f0a8b6;
+
+    --hairline-color: #2a2220;
+    --border-color: #3a2f2c;
+
+    --error-fg: #ff8a80;
+
+    --message-success-bg: #143026;
+    --message-warning-bg: #33230f;
+    --message-error-bg: #3a1614;
+
+    --darkened-bg: #1c1715;
+    --selected-bg: #241d1a;
+    --selected-row: #2e2320;
+
+    --button-fg: #ffffff;
+    --button-bg: #a33d51;
+    --button-hover-bg: #c05e72;
+    --default-button-bg: #a33d51;
+    --default-button-hover-bg: #c05e72;
+    --close-button-bg: #3a2f2c;
+    --close-button-hover-bg: #574842;
+    --delete-button-bg: #a3302a;
+    --delete-button-hover-bg: #c4423b;
+
+    --object-tools-fg: #ffffff;
+    --object-tools-bg: #3a2f2c;
+    --object-tools-hover-bg: #a33d51;
+
+    color-scheme: dark;
+}
+
+
+/* ==========================================================
+   3. TYPOGRAPHY
+   ========================================================== */
+
+body {
+    font-family: var(--font-family-primary);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    letter-spacing: 0.1px;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4,
+.module h2,
+.module caption {
+    letter-spacing: 0.2px;
+}
+
+#content h1 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--body-loud-color);
+    margin-bottom: 18px;
+}
+
+/* Django kuch jagah fixed grey use karta hai — readable bana dete hain */
+.help, .helptext, p.help, div.help,
+.form-row .help,
+.aligned label + p.help {
+    color: var(--body-quiet-color) !important;
+    font-size: 0.8rem;
+}
+
+.small, .quiet, small {
+    color: var(--body-quiet-color) !important;
+}
+
+
+/* ==========================================================
+   4. HEADER + BRANDING
+   ========================================================== */
+
+#header {
+    background: var(--header-bg);
+    color: var(--header-color);
+    padding: 14px 40px;
+    border-bottom: 3px solid var(--primary);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, .18);
+}
+
+#branding h1,
+#site-name {
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+#branding h1 a:link,
+#branding h1 a:visited {
+    color: #ffffff;
+}
+
+.hanni-brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 9px;
+}
+
+.hanni-brand-mark {
+    font-weight: 800;
+    font-size: 1.32rem;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+}
+
+.hanni-brand-sub {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-left: 1px solid rgba(255, 255, 255, .28);
+    padding-left: 9px;
+}
+
+#user-tools {
+    font-size: 0.78rem;
+    color: var(--header-color);
+    letter-spacing: 0.3px;
+}
+
+#user-tools a,
+#logout-form button {
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, .35);
+    font-weight: 600;
+}
+
+#user-tools a:hover,
+#logout-form button:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* Theme toggle button (light / dark / auto) */
+.theme-toggle {
+    background: rgba(255, 255, 255, .12);
+    border-radius: 50%;
+    padding: 6px;
+    transition: background .2s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, .24);
+}
+
+.theme-toggle svg {
+    fill: #ffffff;
+}
+
+div.breadcrumbs {
+    background: var(--breadcrumbs-bg);
+    color: var(--breadcrumbs-fg);
+    padding: 11px 40px;
+    font-size: 0.78rem;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+/* ==========================================================
+   5. LAYOUT + CARDS (modules)
+   ========================================================== */
+
+#content {
+    padding: 26px 40px 60px;
+}
+
+.module,
+.inline-group,
+#changelist,
+#content-related .module {
+    background: var(--body-bg);
+    border: 1px solid var(--hairline-color);
+    border-radius: var(--hanni-radius);
+    box-shadow: var(--hanni-shadow);
+    overflow: hidden;
+}
+
+.module h2,
+.module caption,
+.inline-group h2 {
+    background: var(--darkened-bg);
+    color: var(--body-loud-color);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+.module h2 a,
+.module caption a {
+    color: var(--body-loud-color);
+}
+
+.dashboard .module table th {
+    width: 100%;
+}
+
+.dashboard .module table td a,
+.dashboard .module table th a {
+    padding: 9px 16px;
+    display: block;
+    font-weight: 600;
+}
+
+.dashboard .module table tr:hover {
+    background: var(--selected-row);
+}
+
+
+/* ==========================================================
+   6. SIDEBAR
+   ========================================================== */
+
+#nav-sidebar {
+    background: var(--darkened-bg);
+    border-right: 1px solid var(--hairline-color);
+}
+
+.sticky #nav-sidebar {
+    padding-top: 6px;
+}
+
+#nav-sidebar .module th,
+#nav-sidebar .module caption {
+    background: transparent;
+}
+
+#nav-sidebar a {
+    color: var(--body-medium-color);
+    font-weight: 600;
+    border-radius: 7px;
+}
+
+#nav-sidebar a:hover,
+#nav-sidebar tr:hover a {
+    background: var(--selected-bg);
+    color: var(--link-fg);
+}
+
+#nav-sidebar .current-model a,
+#nav-sidebar .current-model {
+    background: var(--primary);
+    color: #ffffff !important;
+    border-radius: 7px;
+}
+
+#nav-filter {
+    background: var(--body-bg);
+    color: var(--body-fg);
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    padding: 7px 10px;
+}
+
+
+/* ==========================================================
+   7. TABLES / CHANGELIST
+   ========================================================== */
+
+#changelist table thead th,
+.module table thead th {
+    background: var(--darkened-bg);
+    color: var(--body-loud-color);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#changelist table tbody td,
+#changelist table tbody th {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--hairline-color);
+    color: var(--body-fg);
+    vertical-align: middle;
+}
+
+#changelist table tbody tr:hover {
+    background: var(--selected-row);
+}
+
+#changelist table tbody td a {
+    font-weight: 600;
+}
+
+#changelist .actions {
+    background: var(--darkened-bg);
+    border-bottom: 1px solid var(--hairline-color);
+    color: var(--body-fg);
+    padding: 10px 12px;
+}
+
+#changelist-search {
+    background: var(--darkened-bg);
+    border-bottom: 1px solid var(--hairline-color);
+    padding: 12px;
+}
+
+#changelist-search input[type="text"] {
+    min-width: 260px;
+}
+
+#toolbar form #searchbar {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 8px 11px;
+}
+
+#changelist-filter {
+    background: var(--darkened-bg);
+    border-left: 1px solid var(--hairline-color);
+}
+
+#changelist-filter h2 {
+    background: transparent;
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+#changelist-filter h3 {
+    color: var(--body-loud-color);
+    font-size: 0.75rem;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+#changelist-filter li.selected a {
+    color: var(--link-fg);
+    font-weight: 700;
+}
+
+.paginator {
+    background: var(--darkened-bg);
+    border-top: 1px solid var(--hairline-color);
+    color: var(--body-quiet-color);
+    padding: 11px 12px;
+    font-size: 0.8rem;
+}
+
+.paginator a:link,
+.paginator a:visited {
+    background: var(--body-bg);
+    border: 1px solid var(--border-color);
+    color: var(--link-fg);
+    border-radius: 7px;
+    padding: 4px 10px;
+}
+
+.paginator a:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+}
+
+.paginator .this-page {
+    background: var(--primary);
+    color: #ffffff;
+    border-radius: 7px;
+    padding: 4px 10px;
+}
+
+
+/* ==========================================================
+   8. STATUS PILLS (admin.py se aate hain)
+   ========================================================== */
+
+.hanni-pill {
+    display: inline-block;
+    padding: 3px 11px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    line-height: 1.6;
+    white-space: nowrap;
+}
+
+.hanni-pill--ok {
+    background: var(--hanni-ok-bg);
+    color: var(--hanni-ok-fg);
+}
+
+.hanni-pill--off {
+    background: var(--hanni-off-bg);
+    color: var(--hanni-off-fg);
+}
+
+.hanni-pill--info {
+    background: var(--hanni-info-bg);
+    color: var(--hanni-info-fg);
+}
+
+.hanni-money {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--body-loud-color);
+}
+
+.hanni-muted {
+    color: var(--body-quiet-color);
+}
+
+.hanni-items {
+    display: block;
+    max-width: 320px;
+    line-height: 1.5;
+}
+
+.hanni-thumb {
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    display: block;
+}
+
+
+/* ==========================================================
+   9. FORMS
+   ========================================================== */
+
+.form-row {
+    border-bottom: 1px solid var(--hairline-color);
+    padding: 13px 16px;
+}
+
+fieldset.module .form-row:last-child {
+    border-bottom: none;
+}
+
+.aligned label {
+    color: var(--body-medium-color);
+    font-weight: 700;
+    font-size: 0.82rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="tel"],
+input[type="time"],
+input[type="date"],
+textarea,
+select,
+.vTextField {
+    background: var(--body-bg);
+    color: var(--body-fg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 11px;
+    font-family: var(--font-family-primary);
+    font-size: 0.87rem;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.vTextField:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(139, 46, 63, .18);
+    outline: none;
+}
+
+::placeholder {
+    color: var(--body-quiet-color);
+    opacity: 1;
+}
+
+.submit-row {
+    background: var(--darkened-bg);
+    border: 1px solid var(--hairline-color);
+    border-radius: var(--hanni-radius);
+    padding: 13px 16px;
+    box-shadow: var(--hanni-shadow);
+}
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 9px 17px;
+    border: none;
+    transition: background .18s ease, transform .18s ease;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+.submit-row input:hover {
+    transform: translateY(-1px);
+}
+
+.object-tools a {
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    padding: 7px 16px;
+}
+
+.errornote,
+.errorlist li {
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+ul.messagelist li {
+    border-radius: 8px;
+    color: var(--body-fg);
+    font-weight: 600;
+    padding: 12px 16px 12px 40px;
+}
+
+
+/* ==========================================================
+   10. LOGIN PAGE
+   ========================================================== */
+
+body.login {
+    background:
+        radial-gradient(circle at 20% 15%,
+            rgba(139, 46, 63, .14) 0%,
+            transparent 45%),
+        var(--darkened-bg);
+}
+
+.login #container {
+    border: 1px solid var(--hairline-color);
+    border-radius: 14px;
+    box-shadow: var(--hanni-shadow);
+    background: var(--body-bg);
+    overflow: hidden;
+}
+
+.login #header {
+    border-radius: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.login #branding h1 {
+    float: none;
+    margin: 0;
+}
+
+.login .form-row {
+    padding: 8px 0;
+    border: none;
+}
+
+.login .submit-row {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 14px 0 0;
+}
+
+.login .submit-row input[type="submit"] {
+    width: 100%;
+}
+
+
+/* ==========================================================
+   11. RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 767px) {
+    #header {
+        padding: 12px 18px;
+    }
+
+    #content {
+        padding: 18px;
+    }
+
+    div.breadcrumbs {
+        padding: 10px 18px;
+    }
+
+    .hanni-brand-sub {
+        display: none;
+    }
+}
