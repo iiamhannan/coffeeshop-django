@@ -23,7 +23,7 @@ admin.site.index_title = "Dashboard"
 # ==========================================
 
 def pill(text, kind='info'):
-    """Chhota sa colored badge (CSS admin-theme.css me hai)."""
+    """Small colored badge (styled in admin-theme.css)."""
     return format_html(
         '<span class="hanni-pill hanni-pill--{}">{}</span>',
         kind,
@@ -131,7 +131,7 @@ class CoffeeAdmin(admin.ModelAdmin):
         updated = queryset.update(is_available=True)
         self.message_user(
             request,
-            f"{updated} coffee(s) ab available hain."
+            f"{updated} coffee(s) marked as available."
         )
 
     @admin.action(description='Mark selected coffees as unavailable')
@@ -139,7 +139,7 @@ class CoffeeAdmin(admin.ModelAdmin):
         updated = queryset.update(is_available=False)
         self.message_user(
             request,
-            f"{updated} coffee(s) ab unavailable hain."
+            f"{updated} coffee(s) marked as unavailable."
         )
 
     @admin.display(description='Preview')
@@ -150,7 +150,7 @@ class CoffeeAdmin(admin.ModelAdmin):
                 obj.image.url
             )
         return format_html(
-            '<span class="hanni-muted">Koi image upload nahi hui.</span>'
+            '<span class="hanni-muted">No image uploaded.</span>'
         )
 
 

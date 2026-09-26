@@ -1,8 +1,8 @@
 /* ==========================================================
    HANNI'S — ADMIN THEME
-   Light + Dark mode. Django ke apne CSS variables override
-   kiye gaye hain, isliye poora admin (list, form, filters,
-   login, sidebar) automatically theme follow karta hai.
+   Light + Dark mode. Django's own CSS variables are overridden,
+   so the whole admin (list, form, filters, login, sidebar)
+   automatically follows the theme.
    ========================================================== */
 
 
@@ -254,7 +254,7 @@ h1, h2, h3, h4,
     margin-bottom: 18px;
 }
 
-/* Django kuch jagah fixed grey use karta hai — readable bana dete hain */
+/* Django uses fixed grey in a few places — making it readable */
 .help, .helptext, p.help, div.help,
 .form-row .help,
 .aligned label + p.help {
@@ -464,8 +464,8 @@ div.breadcrumbs {
 
 #changelist table thead th,
 .module table thead th {
-    background: var(--darkened-bg);
-    color: var(--body-loud-color);
+    background: var(--hanni-espresso);
+    color: var(--hanni-cream);
     font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.9px;
@@ -474,15 +474,35 @@ div.breadcrumbs {
     border-bottom: 1px solid var(--border-color);
 }
 
+#changelist table thead th a:link,
+#changelist table thead th a:visited {
+    color: var(--hanni-cream);
+}
+
+#changelist table thead th a:hover {
+    color: var(--hanni-sand);
+}
+
+#changelist table tbody tr:nth-child(odd) td,
+#changelist table tbody tr:nth-child(odd) th {
+    background: var(--hanni-cream);
+}
+
+#changelist table tbody tr:nth-child(even) td,
+#changelist table tbody tr:nth-child(even) th {
+    background: var(--hanni-sand);
+}
+
 #changelist table tbody td,
 #changelist table tbody th {
     padding: 11px 12px;
     border-bottom: 1px solid var(--hairline-color);
-    color: var(--body-fg);
+    color: var(--hanni-espresso);
     vertical-align: middle;
 }
 
-#changelist table tbody tr:hover {
+#changelist table tbody tr:hover td,
+#changelist table tbody tr:hover th {
     background: var(--selected-row);
 }
 
@@ -567,7 +587,7 @@ div.breadcrumbs {
 
 
 /* ==========================================================
-   8. STATUS PILLS (admin.py se aate hain)
+   8. STATUS PILLS (come from admin.py)
    ========================================================== */
 
 .hanni-pill {
